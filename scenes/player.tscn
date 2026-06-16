@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://cv755knhq8bf4"]
+
+[ext_resource type="Texture2D" uid="uid://1h7c22jdksk4" path="res://assets/My Sprites/Red Cloack Boy spritesheet idle.png" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://d2ye7ynmgsjij" path="res://scripts/player.gd" id="1_dqkch"]
+[ext_resource type="Texture2D" uid="uid://bwujwp7qixvs0" path="res://assets/My Sprites/Red Cloack Boy shadow.png" id="1_g2els"]
+[ext_resource type="Script" uid="uid://b7b37hrjv4yww" path="res://scripts/input_component.gd" id="4_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://x577dnkxg5j7" path="res://assets/My Sprites/Red Cloack Boy run spriteshhet.png" id="4_tuyoq"]
+[ext_resource type="Script" uid="uid://be2v5nr5fnupd" path="res://scripts/movement_component.gd" id="5_qlg0r"]
+[ext_resource type="Script" uid="uid://ceptgp66obnke" path="res://scripts/health_component.gd" id="7_fjrip"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
+atlas = ExtResource("4_tuyoq")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smehm"]
+atlas = ExtResource("4_tuyoq")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ur7pv"]
+atlas = ExtResource("4_tuyoq")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y4r1p"]
+atlas = ExtResource("4_tuyoq")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tuyoq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2els")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhqgy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqkch")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlg0r")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjrip")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smehm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ur7pv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y4r1p")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fjrip"]
+radius = 5.0
+height = 14.0
+
+[node name="Player" type="CharacterBody2D" unique_id=2026701451]
+script = ExtResource("1_dqkch")
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=436990901]
+self_modulate = Color(1, 1, 1, 0.25490198)
+position = Vector2(0, 2)
+texture = ExtResource("1_g2els")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1374497368]
+sprite_frames = SubResource("SpriteFrames_tuyoq")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.14783359
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=2110357022]
+zoom = Vector2(8, 8)
+position_smoothing_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=255025396]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_fjrip")
+
+[node name="InputComponent" type="Node" parent="." unique_id=2095803152]
+unique_name_in_owner = true
+script = ExtResource("4_qlg0r")
+metadata/_custom_type_script = "uid://b7b37hrjv4yww"
+
+[node name="MovementComponent" type="Node" parent="." unique_id=1387909963 node_paths=PackedStringArray("body", "sprite")]
+unique_name_in_owner = true
+script = ExtResource("5_qlg0r")
+body = NodePath("..")
+sprite = NodePath("../AnimatedSprite2D")
+metadata/_custom_type_script = "uid://be2v5nr5fnupd"
+
+[node name="HealthComponent" type="Node" parent="." unique_id=93145591]
+unique_name_in_owner = true
+script = ExtResource("7_fjrip")
+metadata/_custom_type_script = "uid://ceptgp66obnke"
