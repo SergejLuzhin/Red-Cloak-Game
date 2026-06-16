@@ -93,7 +93,7 @@ texture = ExtResource("1_g2els")
 sprite_frames = SubResource("SpriteFrames_tuyoq")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.14783359
+frame_progress = 0.5749775
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2110357022]
 zoom = Vector2(8, 8)
