@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bam4lnyhioi6k" path="res://assets/2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Tileset.png" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://cv755knhq8bf4" path="res://scenes/player.tscn" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://bhm2fnmyejmgv" path="res://scenes/wooden_box.tscn" id="3_lnu2h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqjtg"]
 texture = ExtResource("1_uwrxv")
@@ -121,3 +122,6 @@ tile_set = SubResource("TileSet_lnu2h")
 [node name="Player" parent="." unique_id=2026701451 instance=ExtResource("2_yqjtg")]
 z_index = 5
 position = Vector2(328, 249)
+
+[node name="AnimatableBody2D" parent="." unique_id=918932545 instance=ExtResource("3_lnu2h")]
+position = Vector2(327, 239)

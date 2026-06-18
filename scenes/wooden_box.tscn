@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://bhm2fnmyejmgv"]
+
+[ext_resource type="Texture2D" uid="uid://2htpcghkd3lx" path="res://assets/My Sprites/Wooden Box/WoodenBox.png" id="1_pib1y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3hh1"]
+atlas = ExtResource("1_pib1y")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vf2h3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o3hh1")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dfhq8"]
+size = Vector2(14, 8)
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" unique_id=918932545]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1036532084]
+position = Vector2(0, -6)
+sprite_frames = SubResource("SpriteFrames_vf2h3")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2041555141]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_dfhq8")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://x577dnkxg5j7"
-path="res://.godot/imported/Red Cloack Boy run spriteshhet.png-abb3c4661a909840351821a81d91efa1.ctex"
+uid="uid://2htpcghkd3lx"
+path="res://.godot/imported/WoodenBox.png-121224baca75afc40da203799b55a97a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/My Sprites/Red Cloack Boy run spriteshhet.png"
-dest_files=["res://.godot/imported/Red Cloack Boy run spriteshhet.png-abb3c4661a909840351821a81d91efa1.ctex"]
+source_file="res://assets/My Sprites/Wooden Box/WoodenBox.png"
+dest_files=["res://.godot/imported/WoodenBox.png-121224baca75afc40da203799b55a97a.ctex"]
 
 [params]
 
