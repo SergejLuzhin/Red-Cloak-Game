@@ -3,10 +3,13 @@
 [ext_resource type="Texture2D" uid="uid://1h7c22jdksk4" path="res://assets/My Sprites/Red Cloack Boy spritesheet idle.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://d2ye7ynmgsjij" path="res://scripts/player.gd" id="1_dqkch"]
 [ext_resource type="Texture2D" uid="uid://bwujwp7qixvs0" path="res://assets/My Sprites/Red Cloack Boy shadow.png" id="1_g2els"]
-[ext_resource type="Script" uid="uid://b7b37hrjv4yww" path="res://scripts/input_component.gd" id="4_qlg0r"]
+[ext_resource type="Script" uid="uid://b7b37hrjv4yww" path="res://scripts/components/input_component.gd" id="4_qlg0r"]
 [ext_resource type="Texture2D" uid="uid://x577dnkxg5j7" path="res://assets/My Sprites/Red Cloack Boy run spriteshhet.png" id="4_tuyoq"]
-[ext_resource type="Script" uid="uid://be2v5nr5fnupd" path="res://scripts/movement_component.gd" id="5_qlg0r"]
-[ext_resource type="Script" uid="uid://ceptgp66obnke" path="res://scripts/health_component.gd" id="7_fjrip"]
+[ext_resource type="Texture2D" uid="uid://bqwcfnc5ae7fc" path="res://assets/My Sprites/Red Cloack Boy jump spritesheet.png" id="4_y4r1p"]
+[ext_resource type="Script" uid="uid://be2v5nr5fnupd" path="res://scripts/components/movement_component.gd" id="5_qlg0r"]
+[ext_resource type="Script" uid="uid://ceptgp66obnke" path="res://scripts/components/health_component.gd" id="7_fjrip"]
+[ext_resource type="Script" uid="uid://kd237mjltxbo" path="res://scripts/components/animation_component.gd" id="8_smehm"]
+[ext_resource type="Script" uid="uid://k1dfoy8r2230" path="res://scripts/components/jump_component.gd" id="12_3v2ag"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
@@ -23,6 +26,18 @@ region = Rect2(32, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
 atlas = ExtResource("1_3vyb7")
 region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2wvv"]
+atlas = ExtResource("4_y4r1p")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3v2ag"]
+atlas = ExtResource("4_y4r1p")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jej6c"]
+atlas = ExtResource("4_y4r1p")
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fjrip"]
 atlas = ExtResource("4_tuyoq")
@@ -61,6 +76,30 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_d2wvv")
+}],
+"loop": true,
+"name": &"jump_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3v2ag")
+}],
+"loop": true,
+"name": &"jump_peak",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jej6c")
+}],
+"loop": true,
+"name": &"jump_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_fjrip")
 }, {
 "duration": 1.0,
@@ -84,38 +123,53 @@ height = 14.0
 [node name="Player" type="CharacterBody2D" unique_id=2026701451]
 script = ExtResource("1_dqkch")
 
-[node name="Shadow" type="Sprite2D" parent="." unique_id=436990901]
+[node name="ShadowSprite" type="Sprite2D" parent="." unique_id=436990901]
 self_modulate = Color(1, 1, 1, 0.25490198)
 position = Vector2(0, 2)
 texture = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1374497368]
 sprite_frames = SubResource("SpriteFrames_tuyoq")
-animation = &"idle"
+animation = &"jump_up"
 autoplay = "idle"
-frame_progress = 0.5749775
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2110357022]
-zoom = Vector2(8, 8)
+zoom = Vector2(12, 12)
 position_smoothing_enabled = true
+position_smoothing_speed = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=255025396]
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_fjrip")
 
-[node name="InputComponent" type="Node" parent="." unique_id=2095803152]
+[node name="Components" type="Node" parent="." unique_id=1635685513]
+
+[node name="JumpComponent" type="Node" parent="Components" unique_id=999861070 node_paths=PackedStringArray("body", "sprite")]
+unique_name_in_owner = true
+script = ExtResource("12_3v2ag")
+body = NodePath("../..")
+sprite = NodePath("../../AnimatedSprite2D")
+metadata/_custom_type_script = "uid://k1dfoy8r2230"
+
+[node name="InputComponent" type="Node" parent="Components" unique_id=2095803152]
 unique_name_in_owner = true
 script = ExtResource("4_qlg0r")
 metadata/_custom_type_script = "uid://b7b37hrjv4yww"
 
-[node name="MovementComponent" type="Node" parent="." unique_id=1387909963 node_paths=PackedStringArray("body", "sprite")]
+[node name="MovementComponent" type="Node" parent="Components" unique_id=1387909963 node_paths=PackedStringArray("body")]
 unique_name_in_owner = true
 script = ExtResource("5_qlg0r")
-body = NodePath("..")
-sprite = NodePath("../AnimatedSprite2D")
+body = NodePath("../..")
 metadata/_custom_type_script = "uid://be2v5nr5fnupd"
 
-[node name="HealthComponent" type="Node" parent="." unique_id=93145591]
+[node name="HealthComponent" type="Node" parent="Components" unique_id=93145591]
 unique_name_in_owner = true
 script = ExtResource("7_fjrip")
 metadata/_custom_type_script = "uid://ceptgp66obnke"
+
+[node name="AnimationComponent" type="Node" parent="Components" unique_id=1695798586 node_paths=PackedStringArray("sprite", "shadow")]
+unique_name_in_owner = true
+script = ExtResource("8_smehm")
+sprite = NodePath("../../AnimatedSprite2D")
+shadow = NodePath("../../ShadowSprite")
+metadata/_custom_type_script = "uid://kd237mjltxbo"
