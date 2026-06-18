@@ -120,7 +120,6 @@ tile_map_data = PackedByteArray("AAAPAAsAAAAGAAAAAAAPAAwAAAAGAAEAAAAPAA0AAAAGAAI
 tile_set = SubResource("TileSet_lnu2h")
 
 [node name="Player" parent="." unique_id=2026701451 instance=ExtResource("2_yqjtg")]
-z_index = 5
 position = Vector2(328, 249)
 
 [node name="AnimatableBody2D" parent="." unique_id=918932545 instance=ExtResource("3_lnu2h")]

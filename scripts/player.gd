@@ -59,7 +59,12 @@ func _on_speed_changed(current_speed: Vector2) -> void:
 ## --- JUMP SIGNALS --- ##
 
 func _on_height_changed(height: float) -> void:
-	current_height = height
+	current_height = abs(height)
+	print(current_height)
+	if current_height > 0:
+		collision_mask = 2
+	else:
+		collision_mask = 1
 	animation_component.resize_shadow_according_to_height(current_height)
 	
 func _on_jump_up() -> void:

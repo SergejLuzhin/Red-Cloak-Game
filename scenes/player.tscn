@@ -11,6 +11,9 @@
 [ext_resource type="Script" uid="uid://kd237mjltxbo" path="res://scripts/components/animation_component.gd" id="8_smehm"]
 [ext_resource type="Script" uid="uid://k1dfoy8r2230" path="res://scripts/components/jump_component.gd" id="12_3v2ag"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y4r1p"]
+size = Vector2(12, 14)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
 region = Rect2(0, 0, 16, 16)
@@ -116,10 +119,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fjrip"]
-radius = 5.0
-height = 14.0
-
 [node name="Player" type="CharacterBody2D" unique_id=2026701451]
 script = ExtResource("1_dqkch")
 
@@ -128,19 +127,21 @@ self_modulate = Color(1, 1, 1, 0.25490198)
 position = Vector2(0, 2)
 texture = ExtResource("1_g2els")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=255025396]
+z_index = 10
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_y4r1p")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1374497368]
+z_index = 5
 sprite_frames = SubResource("SpriteFrames_tuyoq")
-animation = &"jump_up"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2110357022]
 zoom = Vector2(12, 12)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=255025396]
-position = Vector2(0, 1)
-shape = SubResource("CapsuleShape2D_fjrip")
 
 [node name="Components" type="Node" parent="." unique_id=1635685513]
 
